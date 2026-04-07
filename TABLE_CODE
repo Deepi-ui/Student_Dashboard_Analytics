@@ -1,0 +1,61 @@
+-- Create Student Table
+CREATE TABLE students (
+    student_id NUMBER PRIMARY KEY,
+    name VARCHAR2(50),
+    department VARCHAR2(50),
+    year NUMBER
+);
+
+-- Insert Sample Data
+INSERT INTO students VALUES (1, 'Arun', 'IT', 3);
+INSERT INTO students VALUES (2, 'Priya', 'CSE', 2);
+INSERT INTO students VALUES (3, 'Rahul', 'ECE', 3);
+
+-- View All Students
+SELECT * FROM students;
+
+--------------------------------------------------
+
+-- Create Marks Table
+CREATE TABLE marks (
+    student_id NUMBER,
+    subject VARCHAR2(50),
+    score NUMBER
+);
+
+-- Insert Marks Data
+INSERT INTO marks VALUES (1, 'Maths', 85);
+INSERT INTO marks VALUES (1, 'Science', 78);
+INSERT INTO marks VALUES (2, 'Maths', 92);
+INSERT INTO marks VALUES (3, 'Science', 60);
+
+-- View Marks
+SELECT * FROM marks;
+
+--------------------------------------------------
+
+-- Find Average Marks of Each Student
+SELECT student_id, AVG(score) AS average_marks
+FROM marks
+GROUP BY student_id;
+
+--------------------------------------------------
+
+-- Find Top Performing Student
+SELECT student_id, MAX(score) AS highest_score
+FROM marks
+GROUP BY student_id;
+
+--------------------------------------------------
+
+-- Find Students with Low Marks (< 70)
+SELECT student_id, score
+FROM marks
+WHERE score < 70;
+
+--------------------------------------------------
+
+-- Join Students and Marks
+SELECT s.name, m.subject, m.score
+FROM students s
+JOIN marks m ON s.student_id = m.student_id;
